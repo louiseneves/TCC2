@@ -1,0 +1,15 @@
+{
+    "name": "usuario/tcc2",
+    "autoload": {
+        "psr-4": {
+            "Usuario\\Tcc2\\": "src/"
+        }
+    },
+    "authors": [
+        {
+            "name": "Louise Pereira das Neves",
+            "email": "louiseneves87@gmail.com"
+        }
+    ],
+    "require": {}
+}
