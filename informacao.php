@@ -1,39 +1,24 @@
 <?php
 session_start();
 include 'conexao.php';
-// Verifica se o produto foi adicionado ao carrinho através do link
+// Verifica se o produto foi adicionado ao carrinho através do link 
 if (!empty($_GET['adicionar'])) {
-    $imagem = $_GET['imagem'];
-    $nome = $_GET['nome'];
-    $preco = $_GET['valor'];
-    $quantidade = $_GET['quantidade'];
-    $descricao = $_GET['descricao'];
-    $produto = array(
-        'imagem' => $imagem,
-        'nome' => $nome,
-        'valor' => $preco,
-        'quantidade' => $quantidade,
-        'descricao' => $descricao
-    );
-
-    // Verifica se o produto já está no carrinho
-    $produtoExiste = false;
-    if (isset($_SESSION['carrinho']) && !empty($_SESSION['carrinho'])) {
-        foreach ($_SESSION['carrinho'] as $index => $item) {
-            if ($item['nome'] == $nome) {
-                // Atualiza a quantidade do produto
-                $_SESSION['carrinho'][$index]['quantidade'] += $quantidade;
-                $produtoExiste = true;
-                break;
-            }
+    if (isset($_GET['id'])) {
+        $id = $_GET['id'];
+        $imagem = $_GET['imagem'];
+        $nome = $_GET['nome'];
+        $preco = $_GET['valor'];
+        $quantidade = $_GET['quantidade'];
+        $descricao = $_GET['descricao'];
+        $id = $_GET['id'];
+        if (!isset($_SESSION['carrinho'][$id])) {
+            $_SESSION['carrinho'][$id] = 1;
+        } else {
+            $_SESSION['carrinho'][$id] += 1;
         }
     }
-
+    // Verifica se o produto já está no carrinho
     // Se o produto não existir no carrinho, adicione-o
-    if (!$produtoExiste) {
-        $_SESSION['carrinho'][] = $produto;
-    }
-
     echo "<script>
     alert('Produto adicionado ao carrinho!');
 </script>";
@@ -45,13 +30,26 @@ if (!empty($_GET['adicionar'])) {
 ?>
 <!-- Sessão do produto -->
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pt-br">
 
 <head>
-    <meta charset="UTF-8">
+    <meta charset=" UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="style.css">
     <title>Document</title>
+    <script>
+        $('.plus').on('click', function() {
+            var divUpd = $(this).parent().find('.value'),
+                newVal = parseInt(divUpd.text(), 10) + 1;
+            if (newVal <= <?php echo $estoque; ?>) divUpd.text(newVal);
+        });
+
+        $('.minus').on('click', function() {
+            var divUpd = $(this).parent().find('.value'),
+                newVal = parseInt(divUpd.text(), 10) - 1;
+            if (newVal >= 1) divUpd.text(newVal);
+        });
+    </script>
 </head>
 
 <body>
@@ -88,14 +86,14 @@ if (!empty($_GET['adicionar'])) {
                         <div class="options">
                             <div class="amount">
                                 <div class="minus">
-                                    <img src="imagens/minus-big-symbol.png">
+                                    <a href="?menos"> <img src="imagens/minus-big-symbol.png"></a>
                                 </div>
                                 <span><?php echo $_GET['quantidade']; ?></span>
                                 <div class="plus">
-                                    <img src="imagens/alem-disso-positivo-adicionar-simbolo-matematico.png" title="mais ícones">
+                                    <a href="?mais"> <img src="imagens/alem-disso-positivo-adicionar-simbolo-matematico.png" title="mais ícones"></a>
                                 </div>
                             </div>
-                            <a class="botao" href="?adicionar=1&imagem=<?php echo $_GET['imagem']; ?>&nome=<?php echo $_GET['nome']; ?>&preco=<?php echo $_GET['preco']; ?>&descricao=<?php echo $_GET['descricao']; ?>&quantidade=<?php echo $_GET['quantidade']; ?>">
+                            <a class="botao" href="?adicionar=1&id=<?php echo $_GET['id']; ?>&imagem=<?php echo $_GET['imagem']; ?>&nome=<?php echo $_GET['nome']; ?>&valor=<?php echo $_GET['preco']; ?>&descricao=<?php echo $_GET['descricao']; ?>&quantidade=<?php echo $_GET['quantidade']; ?>">
                                 <img src="imagens/vista-lateral-vazia-do-carrinho-de-compras.png">
                                 Adicionar ao carrinho
                             </a>
@@ -106,6 +104,7 @@ if (!empty($_GET['adicionar'])) {
             </div>
         </section>
     </main>
+
 </body>
 
 </html>

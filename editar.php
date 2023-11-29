@@ -2,10 +2,7 @@
 session_start();
 include_once("conexao.php");
 // Verifique se o usuário está autenticado ou tem permissão para editar produtos
-
-
 // Conexão com o banco de dados
-
 // Verifique se o ID do produto é fornecido na URL
 if (isset($_GET['id']) && is_numeric($_GET['id'])) {
     $produto_id = $_GET['id'];

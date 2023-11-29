@@ -11,5 +11,11 @@
             "email": "louiseneves87@gmail.com"
         }
     ],
-    "require": {}
+    "require": {
+        "guzzlehttp/guzzle": "^7.8"
+    },
+    "require-dev": {
+        "phpunit/phpunit": "*"
+       }
+     
 }

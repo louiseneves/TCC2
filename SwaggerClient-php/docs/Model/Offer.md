@@ -1,0 +1,47 @@
+# Offer
+
+## Properties
+Name | Type | Description | Notes
+------------ | ------------- | ------------- | -------------
+**external_id** | **string** | Unique external identifier (for the originator control).  ----  Identificador único externo (para controle do originador). | [optional] 
+**sponsor_name** | **string** | Sponsor name or sponsor company name. The person/company that will pay for this offer.  ----  Razão Social ou Nome do sacado. A pessoa/empresa que irá pagar por esta oferta. | [optional] 
+**sponsor_person_type** | **string** | Sponsor person type. It can be: &#x60;LEGAL_PERSON&#x60; - Company &#x60;NATURAL_PERSON&#x60; - Individual person ---- Tipo de entidade do sacado. Valores possíveis são: &#x60;LEGAL_PERSON&#x60; - Pessoa jurídica &#x60;NATURAL_PERSON&#x60; - Pessoa física | [optional] 
+**sponsor_government_id** | **string** | Sponsor&#x27;s Government tax ID (a.k.a. CNPJ or CPF). Just numbers.  ----  CNPJ ou CPF do sacado. Apenas números. | [optional] 
+**sponsor_external_code** | **string** | External code of the sponsor (for the originator control).  ----  Código externo do sacado (para controle do originador). | [optional] 
+**sponsor_address** | **string** | Address of the sponsor.  ----  Endereço do sacado. | [optional] 
+**sponsor_address_number** | **string** | Address number of sponsor.  ----  Número do endereço do sacado. | [optional] 
+**sponsor_address_complement** | **string** | Sponsor address complement.  ----  Complemento do endereço do sacado. | [optional] 
+**sponsor_neighborhood** | **string** | Neighborhood of the sponsor.  ----  Bairro do sacado. | [optional] 
+**sponsor_city** | **string** | Sponsor&#x27;s city.  ----  Cidade do sacado. | [optional] 
+**sponsor_state** | **string** | Sponsor&#x27;s state.  ----  Estado do sacado. | [optional] 
+**sponsor_country** | **string** | Sponsor&#x27;s country.  ----  País do sacado. | [optional] 
+**sponsor_zip_code** | **string** | Sponsor&#x27;s zip code.  ----  CEP do sacado. | [optional] 
+**sponsor_bank** | **string** | Sponsor&#x27;s bank code (brazilian format). For reference: [https://bank.codes/numero-do-banco/bank/page/2/](https://bank.codes/numero-do-banco/bank/page/2/)  ----  Código do banco do sacado. | [optional] 
+**sponsor_agency** | **string** | Sponsor&#x27;s bank agency code (without last digit).  ----  Código da agência bancária do sacado (Sem o dígito). | [optional] 
+**sponsor_agency_digit** | **string** | Sponsor&#x27;s bank agency last digit.  ----  Dígito da agência bancária do sacado. | [optional] 
+**sponsor_account** | **string** | Sponsor&#x27;s bank account code (without last digit).  ----  Conta corrente do sacado (Sem o dígito). | [optional] 
+**sponsor_account_digit** | **string** | Sponsor&#x27;s bank account last digit.  ----  Dígito da conta corrente do sacado. | [optional] 
+**sponsor_pix_key** | **string** | Sponsor&#x27;s pix key.  ----  Chave pix do sacado. | [optional] 
+**seller_name** | **string** | Seller name or sponsor company name. The person/company that selled and wants to sell the debt right to the fund.  ----  Razão Social ou Nome do cedente. A pessoa/empresa que irá ceder o direito de receber. | [optional] 
+**seller_person_type** | **string** | Seller person type. It can be: &#x60;LEGAL_PERSON&#x60; - Company &#x60;NATURAL_PERSON&#x60; - Individual person ---- Tipo de entidade do cedente. Valores possíveis são: &#x60;LEGAL_PERSON&#x60; - Pessoa jurídica &#x60;NATURAL_PERSON&#x60; - Pessoa física | [optional] 
+**seller_government_id** | **string** | Seller&#x27;s Government tax ID (a.k.a. CNPJ or CPF). Just numbers.  ----  CNPJ ou CPF do cedente. Apenas números | [optional] 
+**seller_external_code** | **string** | External code of the seller (for the originator control).  ----  Código externo do cedente (para controle do originador). | [optional] 
+**seller_address** | **string** | Seller&#x27;s address.  ----  Endereço do cedente. | [optional] 
+**seller_address_number** | **string** | Seller&#x27;s address number.  ----  Número do endereço do cedente. | [optional] 
+**seller_address_complement** | **string** | Seller&#x27;s address complement.  ----  Complemento do endereço do cedente. | [optional] 
+**seller_neighborhood** | **string** | Seller&#x27;s neighborhood.  ----  Bairro do cedente. | [optional] 
+**seller_city** | **string** | Sellers&#x27;s city.  ----  Cidade do cedente. | [optional] 
+**seller_state** | **string** | Seller&#x27;s state.  ----  Estado do cedente. | [optional] 
+**seller_country** | **string** | Seller&#x27;s country.  ----  País do cedente. | [optional] 
+**seller_zip_code** | **string** | Sponsor&#x27;s zip code.  ----  CEP do sacado. | [optional] 
+**seller_bank** | **string** | Seller&#x27;s bank code (brazilian format). For reference: [https://bank.codes/numero-do-banco/bank/page/2/](https://bank.codes/numero-do-banco/bank/page/2/)  ----  Código do banco do cedente. | [optional] 
+**seller_agency** | **string** | Seller&#x27;s bank agency code (without last digit).  ----  Código da agência bancária do cedente (Sem o dígito). | [optional] 
+**seller_agency_digit** | **string** | Seller&#x27;s bank agency last digit.  ----  Dígito da agência bancária do cedente. | [optional] 
+**seller_account** | **string** | Seller&#x27;s bank account code (without last digit).  ----  Conta corrente do cedente (Sem o dígito). | [optional] 
+**seller_account_digit** | **string** | Seller&#x27;s bank account last digit.  ----  Dígito da conta corrente do cedente. | [optional] 
+**coobrigation** | **bool** | The seller has co obrigation to pay in case of default? (true &#x3D; yes, false &#x3D; no).  ----  Co-obrigação por parte do cedente? (true &#x3D; sim, false &#x3D; não). | [optional] 
+**custom_fields** | **object** | This field can be an object containing information agreed and required by the regulation of the fund and that&#x27;s also very specific to the fund business model.  ----  Espaço para especificar informações acordadas no regulamento p/ validar condições de cessão e/ou criterio de elegibilidade. | [optional] 
+**items** | [**\Swagger\Client\Model\OfferItems[]**](OfferItems.md) | This array contains an object with information of the invoice/transaction.  ----  Esse array contém um objeto com informações da nota/duplicata/operação/transação. | [optional] 
+
+[[Back to Model list]](../../README.md#documentation-for-models) [[Back to API list]](../../README.md#documentation-for-api-endpoints) [[Back to README]](../../README.md)
+

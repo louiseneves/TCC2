@@ -1,25 +1,38 @@
+<?php
+session_start();
+include 'conexao.php';
+if (isset($_GET['acao']) && $_GET['acao'] === 'finalizar') {
+    // Limpa a sessão que armazena os produtos no carrinho
+    $_SESSION['carrinho']=array();
+    header('Location: index.php');
+    // Redireciona o usuário para a página de confirmação ou outra página relevante
+    exit; // Encerra o script para evitar execução adicional
+}
+?>
 <!DOCTYPE html>
 <html lang="pt-br">
 
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Pic N Geek</title>
-    <link rel="shortcut icon" type="image/x-icon" href="media/logo.ico" />
-    <link rel="stylesheet" type="text/css" href="css/cadastro.css">
-    <link rel="stylesheet" href="css/master.css">
+    <title>Bem vindo</title>
+    <link rel="stylesheet" href="style.css">
 </head>
 
 <body>
-
-    <h1>Finalizar Compra</h1>
-    <div class='row-fluid'>
-        <div class='span3 texto-direita'>
+    <div>
+        <h3>Encomenda confirmada com sucesso</h3>
+        <p>Muito obrigada pela sua encomenda. Seja bem-vindo à nossa loja</p>
+        <div>
+            <h4>Dados do Pagamento</h4>
+            <p>Conta bancária:</p>
+            <p>Código da encomenda: <strong><?= $_SESSION['encomenda'] ?></strong></p>
+            <p>Total: <strong><?= number_format($_SESSION['total'], 2, ',', '.') ?></strong></p>
         </div>
-        <form method="post" action="processar-compra.php">
-            <!-- Formulário para informações do cliente e método de pagamento -->
-        </form>
+        <div>
+            <a href="?acao=finalizar">Voltar</a>
+        </div>
+    </div>
 </body>
 
 </html>

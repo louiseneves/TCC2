@@ -1,5 +1,6 @@
 <?php
-include_once "conexao.php";
+session_start();
+include 'conexao.php';
 ?>
 <!DOCTYPE html>
 <html lang="pt-br">
@@ -24,6 +25,7 @@ include_once "conexao.php";
     <table border="1">
         <thead>
             <tr>
+                <th>IdUsuário</th>
                 <th>Nº</th>
                 <th>Imagem</th>
                 <th>Nome</th>
@@ -37,11 +39,12 @@ include_once "conexao.php";
         </thead>
         <tbody>
             <?php
-            $sql = "SELECT * FROM produto ORDER BY id ";
-            $pesquisar = mysqli_query($conexao, $sql);
-            while ($linha = $pesquisar->fetch_assoc()) {
+            $id = $_SESSION['id'];
+            $sql = mysqli_query($conexao, "SELECT * FROM produto WHERE idUsuario = '$id'");
+            while ($linha = $sql->fetch_assoc()) {
             ?>
                 <tr>
+                    <td><?php echo $linha['idUsuario']; ?></td>
                     <td> <?php echo $linha['id']; ?> </td>
                     <td><img src="<?php echo $linha['cover_img']; ?>" alt="<?php echo $linha['nome']; ?>" class="produtoMinitura" /> </td>
                     <td><?php echo $linha['nome']; ?> </td>

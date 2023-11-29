@@ -9,6 +9,9 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $usuario = mysqli_escape_string($conexao, trim($_POST["usuario"]));
     $senha = mysqli_escape_string($conexao, trim($_POST["senha"]));
     $administrador = mysqli_escape_string($conexao, trim($_POST["administrador"]));
+    $cidade = mysqli_escape_string($conexao, trim($_POST["cidade"]));
+    $estado = mysqli_escape_string($conexao, trim($_POST["estado"]));
+    $nome_estado = mysqli_escape_string($conexao, trim($_POST["nome_estado"]));
     $sql = "SELECT count(*) as total FROM usuario WHERE usuario = '$usuario'";
     $result = mysqli_query($conexao, $sql);
     $row = mysqli_fetch_assoc($result);
@@ -17,11 +20,20 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         header("Location: cadastro.php");
         exit;
     }
-    $sql = "INSERT INTO cliente(nome,cpf,telefone,endereco) VALUES('$nome','$cpf','$telefone','$endereco');";
-    $sql .= "INSERT INTO usuario(nome,usuario,senha,administrador) VALUES('$nome','$usuario','$senha','$administrador');";
-    if ($conexao->multi_query($sql) === TRUE) {
+    $stmt = "SELECT id FROM cidade WHERE nome = '$cidade' LIMIT 1 ";
+    $resulta = mysqli_query($conexao, $stmt);
+    $linha = mysqli_fetch_assoc($resulta);
+    $dado = $linha['id'];
+    $select = "SELECT id FROM estado WHERE nome = '$estado' LIMIT 1";
+    $resultado = mysqli_query($conexao, $select);
+    $linhas = mysqli_fetch_assoc($resultado);
+    $dados = $linha['id'];
+    $sqli = "INSERT INTO usuario(nome,usuario,senha,administrador,cpf,telefone,endereco,idCidade) VALUES('$nome','$usuario','$senha','user','$cpf','$telefone','$endereco','$dado');"
+        . "INSERT INTO cidade(nome,idEstado) VALUES('$cidade','$dados');"
+        . "INSERT INTO estado(nome,sigla) VALUES('$nome_estado','$estado');";
+    if ($conexao->multi_query($sqli) === TRUE) {
         $_SESSION['status_cadastro'] = true;
-        header("Location: login.php");
+        header("Location: painel.php");
         exit;
     }
     $conexao->close();
@@ -118,19 +130,41 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                         </div>
                         <div class="card-content">
                             <div class="card-content-area">
-                                <select name="cidade" id="cidade" class="form-control" required>
-                                    <option value="">Cidade</option>
-                                    <option value="VilaVelha">Vila Velha</option>
-                                    <option value="Vitoria">Vitória</option>
-                                    <option value="">Cidade</option>
-                                    <option value="">Cidade</option>
-                                    <option value="">Cidade</option>
-                                </select>
+                                <label for="estado">Cidade</label>
+                                <input type="text" name="cidade" id="cidade" class="form-control" required>
                             </div>
                             <div class="card-content">
                                 <div class="card-content-area">
-                                    <label for="estado">Estado</label>
-                                    <input type="text" name="estado" id="estado" class="form-control" required>
+                                    <select name="estado" id="estado" class="form-control" required>
+                                        <option value="">Estado</option>
+                                        <option value="AC">AC</option>
+                                        <option value="AL">AL</option>
+                                        <option value="AP">AP</option>
+                                        <option value="AM">AM</option>
+                                        <option value="BA">BA</option>
+                                        <option value="CE">CE</option>
+                                        <option value="ES">ES</option>
+                                        <option value="DF">DF</option>
+                                        <option value="MA">MA</option>
+                                        <option value="MT">MT</option>
+                                        <option value="MS">MS</option>
+                                        <option value="MG">MG</option>
+                                        <option value="PA">PA</option>
+                                        <option value="PB">PB</option>
+                                        <option value="PR">PR</option>
+                                        <option value="PE">PE</option>
+                                        <option value="PI">PI</option>
+                                        <option value="RJ">RJ</option>
+                                        <option value="RN">RN</option>
+                                        <option value="RS">RS</option>
+                                        <option value="RO">RO</option>
+                                        <option value="RR">RR</option>
+                                        <option value="SC">SC</option>
+                                        <option value="SP">SP</option>
+                                        <option value="SE">SE</option>
+                                        <option value="TO">TO</option>
+                                    </select>
+                                    <input type="hidden" name="nome_estado" value="Acre">
                                 </div>
                                 <div class="card-content">
                                     <div class="card-content-area">
@@ -149,6 +183,10 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                                             <input type="password" name="senha" id="senha" class="form-control" required>
                                         </div>
                                     </div>
+                                    <h1>Formulário de Consentimento LGPD</h1>
+                                    <label>
+                                        <input type="checkbox" name="consentimento" value="aceito"> Eu concordo com a coleta dos meus dados pessoais.
+                                    </label>
                                     <div class="card-footer">
                                         <input type="submit" name="submit" class="submit">
                                     </div>
@@ -168,14 +206,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         }
     }
     ?>
-    <h1>Formulário de Consentimento LGPD</h1>
-    <form method="POST" action="login.php">
-        <label>
-            <input type="checkbox" name="consentimento" value="aceito"> Eu concordo com a coleta dos meus dados pessoais.
-        </label>
-        <br>
-        <button type="submit">Enviar</button>
-    </form>
+
+
 </body>
 
 </html>

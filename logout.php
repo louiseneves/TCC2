@@ -3,7 +3,8 @@
 session_start();
 // Remova todas as variáveis de sessão
 // Destrua a sessão.
-session_destroy();
+unset($_SESSION['usuario']);
+unset($_SESSION['id']);
 // Redirecionar para a página de login
 header('Location: index.php');
 exit();

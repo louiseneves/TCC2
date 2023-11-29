@@ -1,0 +1,10 @@
+{
+    "editor.fontSize": 40,
+    "files.autoSave": "afterDelay",
+    "editor.wordWrap": "on",
+    "editor.accessibilityPageSize": 30,
+    "editor.codeLensFontSize": 10,
+    "editor.fastScrollSensitivity": 10,
+    "editor.inlayHints.fontSize": 20,
+    "workbench.editor.tabSizingFixedMinWidth": 360
+}

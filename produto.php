@@ -1,7 +1,6 @@
 <?php
 session_start();
 include_once "conexao.php";
-
 ?>
 <!DOCTYPE html>
 <html lang="pt-br">
@@ -20,19 +19,19 @@ include_once "conexao.php";
     <?php
     if (isset($_POST['criarProduto'])) {
         // Recupera os dados dos campos
+        $id = $_SESSION['id'];
         $produto = $_POST['produto'];
         $marca = $_POST['marca'];
         $descricao = $_POST['descricao'];
         $preco = $_POST['preco'];
         $validade = $_POST['validade'];
-        $quantidade = $_POST['quantidade'];
         if (isset($_FILES['cover_img']) && !empty($_FILES['cover_img'])) {
             $imagem = "./imagens/" . $_FILES['cover_img']['name'];
             move_uploaded_file($_FILES['cover_img']['tmp_name'], $imagem);
         } else {
             $imagem = "";
         }
-        $sql =  mysqli_query($conexao, "INSERT INTO produto  VALUES ('','" . $imagem . "','" . $produto . "','" . $marca . "','" . $descricao . "','" . $preco . "','" . $validade . "')");
+        $sql =  mysqli_query($conexao, "INSERT INTO produto  VALUES ('','" . $imagem . "','" . $produto . "','" . $marca . "','" . $descricao . "','" . $preco . "','" . $validade . "','".$id."')");
         if ($sql == 1) {
             header("Location: vender.php");
         } else {
@@ -71,12 +70,12 @@ include_once "conexao.php";
                                 <label class="sr-only" for="cover_img">Imagem do Produto:</label>
                                 <input class="form-control input-adm" type="file" name="cover_img" placeholder="Anexar imagem">
                             </div>
-                            <div class="card-footer">
-                                <input type="submit" name="criarProduto" class="submit">
-                            </div>
-                            <div class="card-footer">
-                                <a href="vender.php" class="cancelar">Cancelar</a>
-                            </div>
+                                <div class="card-footer">
+                                    <input type="submit" name="criarProduto" class="submit">
+                                </div>
+                                <div class="card-footer">
+                                    <a href="vender.php" class="cancelar">Cancelar</a>
+                                </div>
     </form>
     </div>
 </body>
